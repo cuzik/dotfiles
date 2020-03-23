@@ -1,0 +1,49 @@
+general {
+        colors = true
+        interval = 5
+}
+
+order += "disk /"
+order += "cpu_usage"
+order += "cpu_temperature 0"
+order += "battery 0"
+order += "volume master"
+order += "tztime local"
+
+disk / {
+        format = "%percentage_avail (%avail)"
+}
+
+cpu_usage {
+        format = "CPU <%usage> {%cpu_cpu1 %cpu0.usage}"
+}
+
+cpu_temperature 0 {
+        format = "T: %degrees °C"
+}
+
+battery 0 {
+        format = "%status %percentage"
+        format_down = "No battery"
+        status_chr = "? CHR"
+        status_bat = "?? BAT"
+        status_unk = "? UNK"
+        status_full = "? FULL"
+        path = "/sys/class/power_supply/BAT%d/uevent"
+        low_threshold = 10
+}
+
+load {
+        format = "%5min"
+}
+
+tztime local {
+        format = "%A %d-%m %H:%M"
+}
+
+volume master {
+        format = "vol: %volume"
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
+}
